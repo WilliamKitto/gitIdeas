@@ -1,0 +1,30 @@
+---
+title: "chi squared demo"
+author: "instr"
+date: "Tuesday, May 19, 2015"
+output: html_document
+---
+
+##If X1,X2,.,Xm are m independent random variables having the standard normal distribution, then the following quantity follows a Chi-Squared distribution with m degrees of freedom. Its mean is m, and its variance is 2m.
+
+## $V = X1^2 + X2^2 + ... +Xm^2$   
+
+##Here is a graph of the Chi-Squared distribution 7 degrees of freedom.
+
+```{r}
+num=70000
+x=rnorm(num) ## generate random standard normal numbers
+x2=x^2
+dim(x2)=c(10000,7) ## organize the squares into a 10000 by 7 matrix
+z=apply(x2,1,sum)  ## get the sums of the rows
+hist(z)
+plot(density(z),main="sum of squares of 7 random samples")
+px=seq(from=0,to=30,by=.02)
+py=dchisq(px,df=7)
+lines(px,py,col="blue")  #plot chi squared function in blue
+mean(z)
+var(z)
+```
+
+##Many statistics follow a chi-squared distribution
+
