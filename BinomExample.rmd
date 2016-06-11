@@ -1,0 +1,128 @@
+---
+title: "Binom"
+author: "instructor"
+date: "Thursday, March 26, 2015"
+output: html_document
+---
+
+using and plotting binomial distributions
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+plot(x,p.5,type="l",main="dbinom \n p=.5")
+z.5=pbinom(x,size=100,prob=.5)
+plot(x,z.5,type="l",main="pbinom \n p=.5")
+par(mfrow=c(1,1))
+```
+
+Lets change p to .2
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+plot(x,p.2,type="l",main="dbinom \n p=.2")
+z.2=pbinom(x,size=100,prob=.2)
+plot(x,z.2,type="l",main="pbinom \n p=.2")
+par(mfrow=c(1,1))
+```
+
+Lets change p to .8
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+plot(x,p.8,type="l",main="dbinom \n p=.8")
+z.8=pbinom(x,size=100,prob=.8)
+plot(x,z.8,type="l",main="pbinom \n p=.8")
+par(mfrow=c(1,1))
+```
+
+let's compute the mean when p=.5
+
+```{r}
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+data.5=x*p.5
+mean.5=sum(data.5)
+mean.5
+```
+
+let's compute the mean when p=.2
+
+```{r}
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+data=x*p.2
+mean.2=sum(data)
+mean.2
+```
+
+how about the mean when p=.8
+
+```{r}
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+data.8=x*p.8
+mean.8=sum(data.8)
+mean.8
+```
+## so a random variable with a size=n and prob=p  
+##has a mean of n*p  
+
+#how about variance or standard deviation?
+
+```{r}
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+data.5=x*p.5
+mean.5=sum(data.5)
+#now center x by subtracting mean from each element
+cx.5=x-mean.5
+#and now sum the squared centered x's times their probabilities
+var.5=sum(cx.5^2*p.5)
+sd.5=sqrt(var.5)
+var.5
+sd.5
+```
+Let' see about our other two (p=.2 and p=.8)
+```{r}
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+data.2=x*p.2
+mean.2=sum(data.2)
+#now center x by subtracting mean from each element
+cx.2=x-mean.2
+#and now sum the squared centered x's times their probabilities
+var.2=sum(cx.2^2*p.2)
+sd.2=sqrt(var.2)
+var.2
+sd.2
+```
+
+## now for p=.8
+
+```{r}
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+data.8=x*p.8
+mean.8=sum(data.8)
+#now center x by subtracting mean from each element
+cx.8=x-mean.8
+#and now sum the squared centered x's times their probabilities
+var.8=sum(cx.8^2*p.8)
+sd.8=sqrt(var.8)
+var.8
+sd.8
+```
+## now check against these formula's
+
+### $mean = n*p$
+
+### $standard deviation = \sqrt(n*p*q)$
+
+
+
