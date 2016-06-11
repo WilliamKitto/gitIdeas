@@ -1,0 +1,31 @@
+---
+title: "Neck vs Chest"
+author: "instr"
+date: "Thursday, May 07, 2015"
+output: html_document
+---
+
+form a linear model of chest~neck
+```{r}
+BEARS=read.csv(file="BEARS.csv",header=T)
+attach(BEARS)
+names(BEARS)
+plot(NECK,CHEST)
+mod=lm(CHEST~NECK)
+abline(mod,lwd=2,col="red")
+myy=seq(from=10,to=31,by=.2)
+out=predict(mod,newdata=data.frame(NECK=myy),se.fit=T,interval="confidence")
+```
+
+##The trick with predict is to realize that the output is a 3 dimensional array. This is embedded as object.name(dollar)fit.  The first colume is the fit itself, the second is the lower confidence endpoints and the third is the upper confidence limits.  So plotting across the x-index gives us the estimates ie lines(x-index,object.name\$fit[,1]) will give us our model estimate, replace name\$fit[,1] with name\$fit[,2] or name\$fit[,3] for the confidence interval plots.
+
+```{r}
+plot(NECK,CHEST)
+lines(myy,out$fit[,1],lwd=3,col="black")
+lines(myy,out$fit[,2],col="blue")
+lines(myy,out$fit[,3],col="blue")
+out2=predict(mod,newdata=data.frame(NECK=myy),se.fit=T,interval="prediction")
+lines(myy,out2$fit[,2],col="red")
+lines(myy,out2$fit[,3],col="red")
+```
+
